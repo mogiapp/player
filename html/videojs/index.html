@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset=utf-8 />
+    <title>Mogi Video On Demand (VOD)</title>
+    <link href="https://unpkg.com/video.js/dist/video-js.css" rel="stylesheet">
+</head>
+
+<body >
+   
+
+    <video id=example-video width=600 height=300 class="video-js vjs-default-skin" controls>
+        </video>
+
+
+    <div style="margin-top: 30px;">
+
+        <form id=load-url>
+            Video URL:
+            <input id=url type=url style="width: 300px;" value="https://demo.cdn1.mogiapp.com/beach/playlist.m3u8">
+            <button type=submit>Load</button>
+        </form>
+    </div>
+    <script src="https://unpkg.com/video.js/dist/video.js"></script>
+    <script src="https://unpkg.com/@videojs/http-streaming/dist/videojs-http-streaming.js"></script>
+
+    <script>
+        (function (window, videojs) {
+            var player = window.player = videojs('example-video');
+
+            // hook up the video switcher
+            var loadUrl = document.getElementById('load-url');
+            var url = document.getElementById('url');
+            var mimeType = document.getElementById('mimetype');
+            loadUrl.addEventListener('submit', function (event) {
+                event.preventDefault();
+                player.src({
+                    src: url.value,
+                    type: "application/x-mpegURL"
+                });
+                return false;
+            });
+        }(window, window.videojs));
+    </script>
+</body>
+
+</html>
